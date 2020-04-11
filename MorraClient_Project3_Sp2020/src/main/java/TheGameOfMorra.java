@@ -1,5 +1,4 @@
 import javafx.scene.control.Label;
-
 import java.io.IOException;
 import java.util.HashMap;
 import javafx.scene.paint.Color;
@@ -151,16 +150,9 @@ public class TheGameOfMorra extends Application
 			primaryStage.show();
 		});
 		
+		
 		exit.setOnAction(e->
-		{
-			
-			
-			//if(isPrinted == true)
-			//{
-			//listItems.getItems().add("Opponent has Quit"); 
-			//}
-			
-			
+		{			
 			try {
 				client.morraInfo.have2players=false;
 				listItems.getItems().add("Opponent has Quit");
@@ -170,11 +162,7 @@ public class TheGameOfMorra extends Application
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				System.out.println("Client closed");
-				
-				
 			}
-			
-			//isQuit = true;
 		});
 		
 		
@@ -623,7 +611,6 @@ public class TheGameOfMorra extends Application
 		whoWon.setTranslateX(0);
 		scoreBox.setTranslateX(-55);
 		scoreBox.setTranslateY(-5);
-		
 		
 		
 		BorderPane pane1 = new BorderPane();

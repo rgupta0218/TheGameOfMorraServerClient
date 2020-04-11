@@ -1,17 +1,15 @@
-import java.io.ObjectInputStream;
+import java.io.ObjectInputStream; 
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-
 public class Server
 {
 
 	int count = 1;	
 	ArrayList<ClientThread> clients = new ArrayList<ClientThread>();
-	
 	TheServer server;
 	private Consumer<MorraInfo> callback;
 	MorraInfo morraInfo;
@@ -51,10 +49,7 @@ public class Server
 						morraInfo.setP2(3);
 						morraInfo.have2players= true;
 					}
-					
 					c.start();
-
-					
 					count++;
 				}
 			}//end of try
@@ -101,35 +96,6 @@ public class Server
 			}
 			 
 			
-			public void updateConnection(MorraInfo morraInfo)
-			{
-//				int i=0;
-//				while(i!=count)
-//				{
-//					i++;
-//				}
-				morraInfo.clientHolder.add(1);
-			}
-			
-			
-			void update2Players(MorraInfo game)
-			{
-				 try
-				 {
-					clients.get(game.getP1()).out.writeObject(game);
-					clients.get(game.getP2()).out.writeObject(game);
-					//MorraInfo rest = new MorraInfo();
-					//rest.clientHolder.addAll(game.clientHolder);
-					//updateClients(rest);
-					
-				 }
-				 catch(Exception e) 
-				 {
-					 
-				 }
-				
-			}
-			
 			public void run( ) 
 			{
 					
@@ -138,17 +104,14 @@ public class Server
 					out = new ObjectOutputStream(connection.getOutputStream());
 					connection.setTcpNoDelay(true);	
 					
-					updateConnection(morraInfo);
+					morraInfo.clientHolder.add(1);
 					updateClients(morraInfo);
 					
 				}
 				catch(Exception e) {
 					System.out.println("Streams not open clientCounter:" + count);
 				}
-				
-					
-				//play only if there are 2 clients available 
-				
+
 				 while(true) 
 				 { 
 						    try 
@@ -175,7 +138,7 @@ public class Server
 
 					}
 				 
-				}//end of run
+				}//end of run 
 			
 		}//end of client thread
 		
