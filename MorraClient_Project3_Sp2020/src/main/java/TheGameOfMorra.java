@@ -176,6 +176,11 @@ public class TheGameOfMorra extends Application {
 			imageThree.setDisable(true);
 			imageFour.setDisable(true);
 			imageFive.setDisable(true);
+			labelP1.setText("");
+			labelP2.setText("");
+			labelP1.setGraphic(null);
+			labelP2.setGraphic(null);
+			
 		});
 		
 		playNextGame.setOnAction(e->
@@ -228,11 +233,9 @@ public class TheGameOfMorra extends Application {
 								
 								playNextRoound.setDisable(false);
 								
-								
-								
 								if(data.getp1Plays() == 1)
 								{
-								    labelP1 = new Label("player 1 played ",imageOne1); 
+								    labelP1 = new Label("<-- player 1 ",imageOne1); 
 									labelP1.setTextFill(Color.web("Blue", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
@@ -241,7 +244,7 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp1Plays() == 2)
 								{
-								    labelP1 = new Label("player 1 played ",imageTwo2); 
+								    labelP1 = new Label("<-- player 1  ",imageTwo2); 
 									labelP1.setTextFill(Color.web("Blue", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
@@ -249,7 +252,7 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp1Plays() == 3)
 								{
-								    labelP1 = new Label("player 1 played ",imageThree3); 
+								    labelP1 = new Label("<-- player 1  ",imageThree3); 
 									labelP1.setTextFill(Color.web("Blue", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
@@ -258,7 +261,7 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp1Plays() == 4)
 								{
-								    labelP1 = new Label("player 1 played ",imageFour4); 
+								    labelP1 = new Label("<-- player 1  ",imageFour4); 
 									labelP1.setTextFill(Color.web("Blue", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
@@ -266,7 +269,7 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp1Plays() == 5)
 								{
-								    labelP1 = new Label("player 1 played ",imageFive5); 
+								    labelP1 = new Label("<-- player 1  ",imageFive5); 
 									labelP1.setTextFill(Color.web("Blue", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
@@ -276,7 +279,7 @@ public class TheGameOfMorra extends Application {
 								
 								if(data.getp2Plays() == 1)
 								{
-								    labelP2 = new Label("player 2 played ",imageOne1); 
+								    labelP2 = new Label("<-- player 2 ",imageOne1); 
 									labelP2.setTextFill(Color.web("Red", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
@@ -284,7 +287,7 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp2Plays() == 2)
 								{
-								    labelP2 = new Label("player 2 played ",imageTwo2); 
+								    labelP2 = new Label("<-- player 2 ",imageTwo2); 
 									labelP2.setTextFill(Color.web("Red", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
@@ -292,7 +295,7 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp2Plays() == 3)
 								{
-								    labelP2 = new Label("player 2 played ",imageThree3); 
+								    labelP2 = new Label("<-- player 2 ",imageThree3); 
 									labelP2.setTextFill(Color.web("Red", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
@@ -300,7 +303,7 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp2Plays() == 4)
 								{
-								    labelP2 = new Label("player 2 played ",imageFour4); 
+								    labelP2 = new Label("<-- player 2 ",imageFour4); 
 									labelP2.setTextFill(Color.web("Red", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
@@ -308,7 +311,7 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp2Plays() == 5)
 								{
-								    labelP2 = new Label("player 2 played ",imageFive5); 
+								    labelP2 = new Label("<-- player 2 ",imageFive5); 
 									labelP2.setTextFill(Color.web("Red", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
