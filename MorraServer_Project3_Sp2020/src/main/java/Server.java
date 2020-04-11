@@ -33,15 +33,15 @@ public class Server
 		
 			try(ServerSocket mysocket = new ServerSocket(5555);)
 			{
-			    System.out.println("Server is waiting for a client!");
-				
+			    System.out.println("Server is waiting for a client!"); 
+			    
 			    while(true) 
 			    {
 			        threadCheck();
 					ClientThread c = new ClientThread(mysocket.accept(), count);
 					clients.add(c);
 					morraInfo.clientHolder.add(clients.size());
-					//System.out.println("client holder: "+morraInfo.clientHolder.get(0));
+					
 					if(count == 1)
 					{
 						morraInfo.setP1(1);
@@ -51,9 +51,10 @@ public class Server
 						morraInfo.setP2(3);
 						morraInfo.have2players= true;
 					}
+					
 					c.start();
-					System.out.println("Number of clients joined: " + count);
-					System.out.println("clients ArrayList size: " + clients.size());
+
+					
 					count++;
 				}
 			}//end of try
@@ -66,10 +67,7 @@ public class Server
 		for(int i = 0; i<clients.size(); i++) 
 		{
 			ClientThread t = clients.get(i); 
-			if(t.getState() == null)
-			{
-				morraInfo.have2players = false;
-			}
+
 			System.out.println("Client #: " + t.count+ " is " + 
 								t.getState() + " and " + t.isAlive());
 		}
@@ -169,6 +167,7 @@ public class Server
 						    {
 						    	
 						    	System.out.println("Client has left");
+						    	morraInfo.have2players = false;
 						    	updateClients(morraInfo); 
 						    	clients.remove(this);
 						    	break;

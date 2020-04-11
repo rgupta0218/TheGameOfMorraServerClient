@@ -42,7 +42,10 @@ public class Client extends Thread{
 				clientNumber=morraInfo.clientHolder.lastIndexOf(1);
 				callback.accept(morraInfo);
 			}
-			catch(Exception e) {}
+			catch(Exception e) 
+			{
+				
+			}
 			send(morraInfo);
 			
 		}
@@ -56,7 +59,10 @@ public class Client extends Thread{
 					this.morraInfo = morraInfo2;
 					callback.accept(morraInfo2);					
 				}
-				catch (Exception e) {}
+				catch (Exception e) 
+				{
+					
+				}
 			}
 	
     }

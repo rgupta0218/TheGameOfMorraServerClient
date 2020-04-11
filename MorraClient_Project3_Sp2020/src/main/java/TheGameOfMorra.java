@@ -1,4 +1,6 @@
 import javafx.scene.control.Label;
+
+import java.io.IOException;
 import java.util.HashMap;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -151,15 +153,27 @@ public class TheGameOfMorra extends Application
 		
 		exit.setOnAction(e->
 		{
-			System.out.println("Client closed");
+			
 			
 			//if(isPrinted == true)
 			//{
-				listItems.getItems().add("Opponent has Quit");
+			//listItems.getItems().add("Opponent has Quit"); 
 			//}
 			
 			
-			primaryStage.close();
+			try {
+				client.morraInfo.have2players=false;
+				listItems.getItems().add("Opponent has Quit");
+				client.socketClient.close();
+				
+				primaryStage.close(); 
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("Client closed");
+				
+				
+			}
+			
 			//isQuit = true;
 		});
 		
@@ -371,7 +385,7 @@ public class TheGameOfMorra extends Application
 								}
 							}
 						}
-						if((data.have2players == false) && (isQuit==false))
+						if((data.have2players == false)  && (isQuit==false))
 						{
 							listItems.getItems().add("Only one player...waiting for other player");
 							isQuit = true;
