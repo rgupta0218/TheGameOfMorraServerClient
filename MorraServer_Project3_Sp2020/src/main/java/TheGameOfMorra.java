@@ -35,6 +35,13 @@ public class TheGameOfMorra extends Application {
 	VBox whoWon ;
 	boolean printedP1 = false;
 	boolean printedP2 = false;
+	
+	
+	boolean p1Guessed = false;
+	boolean p2Guessed = false;
+	boolean p1Played = false;
+	boolean p2Played = false;
+	
 	//feel free to remove the starter code from this method
 	@Override
 	public void start(Stage primaryStage) throws Exception 
@@ -89,22 +96,37 @@ public class TheGameOfMorra extends Application {
 						if( (data.getP1Guess() !=0) && (data.getp1Plays() ==0 ))
 						{
 							listItems.getItems().add("Player 1 guessed "+ data.getP1Guess());
+							p1Guessed=true;
 						}
 						
 					   
 						else if( (data.getP2Guess() !=0) && (data.getp2Plays() ==0 ))
 						{
 							listItems.getItems().add("Player 2 guessed "+ data.getP2Guess());
+							p2Guessed=true;
 						}
 						
 						else if((data.getp2Plays() != 0) && (data.getP2() == 3))
 						{
 							listItems.getItems().add("Player 2 played "+data.getp2Plays());
-							if(data.winner() == 1)
+							p2Played=true;
+
+						} 
+						
+						else if((data.getp1Plays() != 0) && (data.getP1() == 1)) 
+						{
+							listItems.getItems().add("Player 1 played "+data.getp1Plays());
+							p1Played=true;
+						}
+					}
+				
+					
+					if((p1Guessed==true) && (p2Guessed==true) && (p1Played==true) && (p2Played==true))
+					{
+						
+						 	if(data.winner() == 1)
 							{
-//								Label label = new Label("Player 1 WON");
-//							    label.setTextFill(Color.web("Blue", 1.0));
-//								label.setFont(Font.font("Times", FontWeight.BOLD,40)); 
+
 								listItems.getItems().add("Player 1 WON");
 								data.player1Winn.add(1);
 								
@@ -114,15 +136,13 @@ public class TheGameOfMorra extends Application {
 									System.out.println("Size p1 array" + data.player1Winn.size());
 									listItems.getItems().add("Player 1 WON THE GAME");
 								}
-								//whoWon.getChildren().add(label);
+								
 							
 							}
 							
 							else if(data.winner() == 2)
 							{
-//								Label label = new Label("Player 2 WON");
-//							    label.setTextFill(Color.web("Blue", 1.0));
-//								label.setFont(Font.font("Times", FontWeight.BOLD,20));
+
 								listItems.getItems().add("Player 2 WON");
 								data.player2Winn.add(1);
 								
@@ -131,31 +151,25 @@ public class TheGameOfMorra extends Application {
 									listItems.getItems().add("Player 2 WON THE GAME");
 								}
 								
-								//whoWon.getChildren().add(label);
 							}
 							
 							else 
 							{
-//								Label label = new Label("No one WON");
-//							    label.setTextFill(Color.web("Black", 1.0));
-//								label.setFont(Font.font("Times", FontWeight.BOLD,20)); 
+
 								listItems.getItems().add("No one WON");
 								
-								//whoWon.getChildren().add(label);
+								
 							}
-						} 
-						
-						else if((data.getp1Plays() != 0) && (data.getP1() == 1)) 
-						{
-							listItems.getItems().add("Player 1 played "+data.getp1Plays());
-						}
 					}
-					//listItems.getItems().add("Current Hand Winner:  "+ data.evaluate());
+					
 				}); 
 
 			});
 		
 		});
+		
+		
+
 		
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() 
 		{

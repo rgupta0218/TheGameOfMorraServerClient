@@ -162,7 +162,7 @@ public class TheGameOfMorra extends Application {
 //									Label label = new Label("Player 1 WON");
 //								    label.setTextFill(Color.web("Blue", 1.0));
 //									label.setFont(Font.font("Times", FontWeight.BOLD,40)); 
-									listItems.getItems().add("Player 1 WON");
+									listItems.getItems().add("Player 1 WON THIS ROUND");
 //									data.player1Winn.add(1);
 									client.morraInfo.player1Winn.add(1);
 									
@@ -184,7 +184,7 @@ public class TheGameOfMorra extends Application {
 //									Label label = new Label("Player 2 WON");
 //								    label.setTextFill(Color.web("Blue", 1.0));
 //									label.setFont(Font.font("Times", FontWeight.BOLD,20));
-									listItems.getItems().add("Player 2 WON");
+									listItems.getItems().add("Player 2 WON THE ROUND");
 									//data.player2Winn.add(1);
 									
 									System.out.println("arraySize2: "+ data.player2Winn.size());
