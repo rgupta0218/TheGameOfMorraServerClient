@@ -25,13 +25,14 @@ import javafx.scene.effect.ColorAdjust;
 
 public class TheGameOfMorra extends Application {
 
-	int P1TotalWin = 0;
-	int P2TotalWin = 0;
+
 	public static void main(String[] args) 
 	{
 		launch(args);
 	}
 
+	int P1TotalWin = 0;
+	int P2TotalWin = 0;
 	Client client;
 	int countclient = 0;
 	HashMap<String, Scene> sceneMap;
@@ -40,14 +41,10 @@ public class TheGameOfMorra extends Application {
 	Button TurnOnClient, GuessButton, finger1,finger2,finger3,finger4,finger5;
 	TextField tf, port, ipAdd;
 	ImageView imageOne, imageTwo, imageThree, imageFour, imageFive; 
-	
-	ImageView imageOne1, imageTwo2, imageThree3, imageFour4, imageFive5; 
-	//ImageView imageOne11,imageTwo22,imageThree33,image,imageTwo22 ;
-	
 	MorraInfo morraInfo;
 	VBox move = new VBox();
 	HBox fingersBox;
-	VBox clientBox, whoWon, scoreBox;
+	VBox clientBox, whoWon, scoreBox, scoreBox2;
 	Button playNextRoound;
 	Button playNextGame;
 	Button exit;
@@ -55,9 +52,10 @@ public class TheGameOfMorra extends Application {
 	boolean p2played = false;
 	Label labelP1; 
 	Label labelP2; 
-//	Label winnerLabelP1;
-//	Label winnerLabelP2;
-	
+	Label winnerLabelP1;
+	Label winnerLabelP2;
+	ColorAdjust colorAdjust;
+	ColorAdjust colorAdjust1;
 	
 	//feel free to remove the starter code from this method
 	@Override
@@ -74,26 +72,23 @@ public class TheGameOfMorra extends Application {
 		GuessButton = new Button("Guess"); 
 		whoWon = new VBox();
 		whoWon.setTranslateX(100); 
-		scoreBox = new VBox(); 
+		
 		
 		port.setPrefWidth(120);
 		port.setMaxWidth(120);
 		ipAdd.setPrefWidth(120);
 		ipAdd.setMaxWidth(120);
-		//listItems2.setPrefSize(10, 10);
 		tf.setPrefWidth(120);
 		tf.setMaxWidth(120);
 		tf.setPromptText("Enter your guess"); 
 		
-        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(-0.5);
         
         
-        ColorAdjust colorAdjust1 = new ColorAdjust();
+        colorAdjust1 = new ColorAdjust();
         colorAdjust1.setBrightness(0);
-        
- 
-        
+       
         move.setTranslateX(100); 
 		
         
@@ -108,20 +103,7 @@ public class TheGameOfMorra extends Application {
 		imageThree = new ImageView(finger3);
 		imageFour = new ImageView(finger4);
 		imageFive = new ImageView(finger5);
-		
-//		imageOne1 = new ImageView(finger1);
-//		imageTwo2 = new ImageView(finger2);
-//		imageThree3 = new ImageView(finger3);
-//		imageFour4 = new ImageView(finger4);
-//		imageFive5 = new ImageView(finger5);
-		
-//		imageOne11 = new ImageView(finger1);
-//		imageTwo22 = new ImageView(finger2);
-//		imageThree33 = new ImageView(finger3);
-//		imageFour44 = new ImageView(finger4);
-//		imageFive55 = new ImageView(finger5);
-		
-//		eRatio(true);
+
 		
 		playNextRoound = new Button("Play next round");
 		playNextRoound.setDisable(true);
@@ -132,39 +114,36 @@ public class TheGameOfMorra extends Application {
 		exit = new Button("Exit game");
 		
 		
+		winnerLabelP1 = new Label("Player1: " + P1TotalWin);
+		winnerLabelP2 = new Label("Player2: " + P2TotalWin);
+		
+
+		
+		scoreBox = new VBox();
+		scoreBox2  = new VBox(winnerLabelP1,winnerLabelP2, scoreBox);  
+	    
+		winnerLabelP1.setText("Player1 points: " + P1TotalWin);
+	    winnerLabelP1.setTextFill(Color.web("RED", 1.0));
+	    winnerLabelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
+		scoreBox.getChildren().addAll(winnerLabelP1);
+		
+		winnerLabelP2.setText("Player2 points: " + P2TotalWin);
+	    winnerLabelP2.setTextFill(Color.web("CYAN", 1.0));
+	    winnerLabelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
+		scoreBox.getChildren().addAll(winnerLabelP2);
+		
+		
 		playNextRoound.setOnAction(h->
 		{
-			client.morraInfo.setp1Plays(0);
-			client.morraInfo.setp2Plays(0);
-			client.morraInfo.setP1Guess(0);
-			client.morraInfo.setP2Guess(0);
-			p1played=false;
-			p2played=false;
-			tf.clear();
-			tf.setDisable(false);
-			GuessButton.setDisable(false);
-			listItems.getItems().clear();
-			playNextRoound.setDisable(true);
-			imageOne.setEffect(colorAdjust);
-			imageTwo.setEffect(colorAdjust);
-			imageThree.setEffect(colorAdjust);
-			imageFour.setEffect(colorAdjust);
-			imageFive.setEffect(colorAdjust);
-			imageOne.setDisable(true);
-			imageTwo.setDisable(true);
-			imageThree.setDisable(true);
-			imageFour.setDisable(true);
-			imageFive.setDisable(true);
-			labelP1.setText("");
-			labelP2.setText("");
-			labelP1.setGraphic(null);
-			labelP2.setGraphic(null);
-			
+			myclear();
+	
 		});
 		
 		playNextGame.setOnAction(e->
 		{
 			myclear();
+			winnerLabelP1.setText("Player1 points: 0");
+			winnerLabelP1.setText("Player2 points: 0");
 			primaryStage.show();
 		});
 		
@@ -311,14 +290,23 @@ public class TheGameOfMorra extends Application {
 								{
 									listItems.getItems().add("Player 1 WON THIS ROUND");
 									client.morraInfo.player1Winn.add(1);
-									System.out.println("arraySize P1: "+ client.morraInfo.player1Winn.size());
-									System.out.println("arraySize P1 data: "+ data.player1Winn.size());
-									P1TotalWin++;
-//								    winnerLabelP1 = new Label("Player1: 1"); 
-//								    winnerLabelP1.setTextFill(Color.web("RED", 1.0));
-//								    winnerLabelP1.setFont(Font.font("Times", FontWeight.BOLD,15));
-//									scoreBox.getChildren().addAll(winnerLabelP1);
-//									
+
+									P1TotalWin++; 
+									 
+									
+									
+						
+									winnerLabelP1.setText("Player1 points: " + P1TotalWin);
+								    winnerLabelP1.setTextFill(Color.web("RED", 1.0));
+								    winnerLabelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
+									try {
+										 scoreBox.getChildren().add(winnerLabelP1); 
+									} catch (Exception e2) {
+										System.out.println("Two labes");
+									}
+								    
+								   
+									
 									
 									if(P1TotalWin==2) 
 									{
@@ -335,12 +323,17 @@ public class TheGameOfMorra extends Application {
 								{
 									listItems.getItems().add("Player 2 WON THE ROUND");
 									P2TotalWin++;
-//								    winnerLabelP2 = new Label("Player2: 1"); 
-//								    winnerLabelP2.setTextFill(Color.web("RED", 1.0));
-//								    winnerLabelP2.setFont(Font.font("Times", FontWeight.BOLD,15));
-//									scoreBox.getChildren().addAll(winnerLabelP2); 
 									
-									System.out.println("arraySize P2: "+ data.player2Winn.size());
+									winnerLabelP2.setText("Player2 points: " + P2TotalWin);
+								    winnerLabelP2.setTextFill(Color.web("CYAN", 1.0));
+								    winnerLabelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
+									try {
+										 scoreBox.getChildren().add(winnerLabelP2); 
+									} catch (Exception e2) {
+										System.out.println("Two labes");
+									}
+									
+									//System.out.println("arraySize P2: "+ data.player2Winn.size());
 									if(P2TotalWin ==2) 
 									{
 										listItems.getItems().add("Player 2 WON THE GAME");
@@ -365,12 +358,7 @@ public class TheGameOfMorra extends Application {
 				client.start();
 		});
 
-		imageOne.setDisable(true);
-		imageTwo.setDisable(true);
-		imageThree.setDisable(true);
-		imageFour.setDisable(true);
-		imageFive.setDisable(true);
-		
+		imageDisable();
 
 	
 		GuessButton.setOnAction(e->
@@ -386,11 +374,7 @@ public class TheGameOfMorra extends Application {
 				client.morraInfo.setP2Guess(x);
 			}
 			
-			imageOne.setDisable(false);
-			imageTwo.setDisable(false);
-			imageThree.setDisable(false);
-			imageFour.setDisable(false);
-			imageFive.setDisable(false);
+			imageDisableFalse() ;
 			
 			imageOne.setEffect(colorAdjust1);
 			imageTwo.setEffect(colorAdjust1);
@@ -404,14 +388,9 @@ public class TheGameOfMorra extends Application {
 
 		});
 		
-		
-
 
 		//finger 1
 		imageViewFunc(imageOne);
-//		imageOne.setFitHeight(100);
-//		imageOne.setFitWidth(150);
-//		imageOne.setPreserveRatio(true);
 		imageOne.setDisable(true);
 		imageOne.setEffect(colorAdjust);
 		imageOne.setOnMouseClicked(e->
@@ -427,8 +406,6 @@ public class TheGameOfMorra extends Application {
 
 	 		client.send(client.morraInfo); 
 	 		imageOne.setEffect(colorAdjust);
-
-	 		
 	 		imageDisable() ;
 	 		tf.setDisable(true);
 		}); 
@@ -451,7 +428,6 @@ public class TheGameOfMorra extends Application {
 			}
 	 		client.send(client.morraInfo); 
 	 		imageTwo.setEffect(colorAdjust);
-	 		
 	 		imageDisable() ;
 	 		tf.setDisable(true);
 	 
@@ -474,7 +450,6 @@ public class TheGameOfMorra extends Application {
 			}
 	 		client.send(client.morraInfo);	
 	 		imageThree.setEffect(colorAdjust);
- 
 	 		imageDisable() ;
 	 		tf.setDisable(true);
 		});
@@ -603,12 +578,12 @@ public class TheGameOfMorra extends Application {
 		 
 		clientBox = new VBox(10, tf,GuessButton,fingersBox,move,playNextRoound,playNextGame,exit);
 		
-		
+		 
 		listItems.setPrefSize(50, 100); 
 		
 		whoWon.setTranslateX(0);
-		scoreBox.setTranslateX(-25);
-		scoreBox.setTranslateY(-55);
+		scoreBox.setTranslateX(-55);
+		scoreBox.setTranslateY(-5);
 		
 		
 		
@@ -616,7 +591,7 @@ public class TheGameOfMorra extends Application {
 		pane1.setTop(clientBox);
 		pane1.setBottom(listItems);
 		pane1.setCenter(whoWon);
-		pane1.setRight(scoreBox);
+		pane1.setRight(scoreBox2); 
 		
 		
 		Image image = new Image("back2.jpeg");
