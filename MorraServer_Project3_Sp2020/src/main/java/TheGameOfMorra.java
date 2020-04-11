@@ -133,7 +133,7 @@ public class TheGameOfMorra extends Application {
 							
 						 	if(data.winner() == 1)
 							{
-						 		
+						
 								listItems.getItems().add("Player 1 WON THIS ROUND");
 								data.player1Winn.add(1);
 								
