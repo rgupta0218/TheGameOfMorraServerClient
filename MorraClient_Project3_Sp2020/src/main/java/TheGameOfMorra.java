@@ -110,7 +110,6 @@ public class TheGameOfMorra extends Application {
 			p2played=false;
 			tf.clear();
 			tf.setDisable(false);
-			//GuessButton.setDisable(true);
 			listItems.getItems().clear();
 			playNextRoound.setDisable(true);
 			imageOne.setEffect(colorAdjust1);
@@ -142,7 +141,6 @@ public class TheGameOfMorra extends Application {
 								&& (data.getp1Plays() !=0) && (data.getP1() == 1))
 							{
 								
-								
 								listItems.getItems().add("Player 1 guessed "+ data.getP1Guess());
 								listItems.getItems().add("Player 1 played "+data.getp1Plays());
 								listItems.getItems().add("Player 2 guessed "+ data.getP2Guess());
@@ -150,20 +148,13 @@ public class TheGameOfMorra extends Application {
 								p1played=true;
 								
 								playNextRoound.setDisable(false);
-								//p2played = true;
-								//int x = data.getp2Plays();
-//								Label label1 = new Label();
-//								label1.setPrefSize(20, 20);
-//								label1.setGraphic(new ImageView(finger1));
-								//whoWon.getChildren().add(label1);
+
 								
 								if(data.winner() == 1)
 								{
-//									Label label = new Label("Player 1 WON");
-//								    label.setTextFill(Color.web("Blue", 1.0));
-//									label.setFont(Font.font("Times", FontWeight.BOLD,40)); 
+
 									listItems.getItems().add("Player 1 WON THIS ROUND");
-//									data.player1Winn.add(1);
+
 									client.morraInfo.player1Winn.add(1);
 									
 									System.out.println("arraySize1: "+ client.morraInfo.player1Winn.size());
@@ -172,7 +163,7 @@ public class TheGameOfMorra extends Application {
 									{
 										listItems.getItems().add("Player 1 WON THE GAME");
 									}
-									//whoWon.getChildren().add(label);
+									
 									GuessButton.setDisable(false);
 									imageDisableFalse();
 	
@@ -181,11 +172,9 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.winner() == 2)
 								{
-//									Label label = new Label("Player 2 WON");
-//								    label.setTextFill(Color.web("Blue", 1.0));
-//									label.setFont(Font.font("Times", FontWeight.BOLD,20));
+
 									listItems.getItems().add("Player 2 WON THE ROUND");
-									//data.player2Winn.add(1);
+									
 									
 									System.out.println("arraySize2: "+ data.player2Winn.size());
 									if(data.player2Winn.size()==18) 
@@ -196,44 +185,20 @@ public class TheGameOfMorra extends Application {
 									imageDisableFalse();
 
 	
-									//whoWon.getChildren().add(label);
+									
 								}
 								
 								else 
 								{
-//									Label label = new Label("No one WON");
-//								    label.setTextFill(Color.web("Black", 1.0));
-//									label.setFont(Font.font("Times", FontWeight.BOLD,20)); 
+									
 									listItems.getItems().add("No one WON");
 									GuessButton.setDisable(false);
 									imageDisableFalse();
 	
-
-									//whoWon.getChildren().add(label);
 								}
 							} 
 							
-//							else if((data.getp1Plays() != 0) && (data.getP1() == 1)) 
-//							{
-//								listItems.getItems().add("Player 1 played "+data.getp1Plays());
-//								//int x = data.getp2Plays();
-//								if(data.getp1Plays() == 1)
-//								{
-//									//Label label1 = new Label();
-////									listItems.getItems().add("Player 1 played "); 
-////									imageOne.setImage(finger1);
-////								    ImageView imageView = new ImageView(finger1);
-////								    imageView.setFitHeight(100);
-////								    imageView.setFitWidth(150);
-//							
-////									label1.setGraphic(new ImageView(finger1));
-////									label1.setMaxHeight(100);
-////									label1.setWidth(5);
-////									whoWon.getChildren().add(imageView);
-//								}
-//
-//								
-//							}
+
 						}
 					}); 
 				}); 

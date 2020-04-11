@@ -126,7 +126,6 @@ public class TheGameOfMorra extends Application {
 						
 						 	if(data.winner() == 1)
 							{
-
 								listItems.getItems().add("Player 1 WON");
 								data.player1Winn.add(1);
 								
@@ -136,29 +135,22 @@ public class TheGameOfMorra extends Application {
 									System.out.println("Size p1 array" + data.player1Winn.size());
 									listItems.getItems().add("Player 1 WON THE GAME");
 								}
-								
-							
 							}
 							
 							else if(data.winner() == 2)
 							{
-
 								listItems.getItems().add("Player 2 WON");
 								data.player2Winn.add(1);
 								
 								if(data.player2Winn.size()==2) 
 								{
 									listItems.getItems().add("Player 2 WON THE GAME");
-								}
-								
+								}	
 							}
 							
 							else 
 							{
-
 								listItems.getItems().add("No one WON");
-								
-								
 							}
 					}
 					
@@ -210,7 +202,6 @@ public class TheGameOfMorra extends Application {
 		listItems.setStyle("-fx-background-insets: 0 ;");
 		
 		listItems.setPrefSize(150, 100);
-		
 		
 		pane.setLeft(listItems);
 		//pane.setRight(tf);
