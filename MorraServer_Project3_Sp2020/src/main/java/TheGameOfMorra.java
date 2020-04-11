@@ -99,6 +99,11 @@ public class TheGameOfMorra extends Application {
 							p1Guessed=true;
 						}
 						
+						else if((data.getp1Plays() != 0) && (data.getP1() == 1)) 
+						{
+							listItems.getItems().add("Player 1 played "+data.getp1Plays());
+							p1Played=true;
+						}
 					   
 						else if( (data.getP2Guess() !=0) && (data.getp2Plays() ==0 ))
 						{
@@ -106,6 +111,7 @@ public class TheGameOfMorra extends Application {
 							p2Guessed=true;
 						}
 						
+
 						else if((data.getp2Plays() != 0) && (data.getP2() == 3))
 						{
 							listItems.getItems().add("Player 2 played "+data.getp2Plays());
@@ -113,20 +119,17 @@ public class TheGameOfMorra extends Application {
 
 						} 
 						
-						else if((data.getp1Plays() != 0) && (data.getP1() == 1)) 
-						{
-							listItems.getItems().add("Player 1 played "+data.getp1Plays());
-							p1Played=true;
-						}
+
 					}
 				
 					
 					if((p1Guessed==true) && (p2Guessed==true) && (p1Played==true) && (p2Played==true))
 					{
-						
+							
 						 	if(data.winner() == 1)
 							{
-								listItems.getItems().add("Player 1 WON");
+						 		
+								listItems.getItems().add("Player 1 WON THIS ROUND");
 								data.player1Winn.add(1);
 								
 								
@@ -135,11 +138,12 @@ public class TheGameOfMorra extends Application {
 									System.out.println("Size p1 array" + data.player1Winn.size());
 									listItems.getItems().add("Player 1 WON THE GAME");
 								}
+								
 							}
 							
 							else if(data.winner() == 2)
 							{
-								listItems.getItems().add("Player 2 WON");
+								listItems.getItems().add("Player 2 WON THIS ROUND");
 								data.player2Winn.add(1);
 								
 								if(data.player2Winn.size()==2) 
@@ -148,10 +152,15 @@ public class TheGameOfMorra extends Application {
 								}	
 							}
 							
-							else 
+							else if(data.winner()==0)
 							{
-								listItems.getItems().add("No one WON");
+								listItems.getItems().add("No one WON THIS ROUND");
+								System.out.print("Here");
 							}
+						 	p1Guessed=false;
+						 	p2Guessed=false;
+						 	p1Played=false;
+						 	p2Played=false;
 					}
 					
 				}); 

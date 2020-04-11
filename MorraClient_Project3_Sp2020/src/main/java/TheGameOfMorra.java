@@ -110,6 +110,7 @@ public class TheGameOfMorra extends Application {
 			p2played=false;
 			tf.clear();
 			tf.setDisable(false);
+			GuessButton.setDisable(false);
 			listItems.getItems().clear();
 			playNextRoound.setDisable(true);
 			imageOne.setEffect(colorAdjust1);
@@ -117,6 +118,11 @@ public class TheGameOfMorra extends Application {
 			imageThree.setEffect(colorAdjust1);
 			imageFour.setEffect(colorAdjust1);
 			imageFive.setEffect(colorAdjust1);
+			imageOne.setDisable(true);
+			imageTwo.setDisable(true);
+			imageThree.setDisable(true);
+			imageFour.setDisable(true);
+			imageFive.setDisable(true);
 			
 		});
 		
@@ -159,6 +165,7 @@ public class TheGameOfMorra extends Application {
 									
 									System.out.println("arraySize1: "+ client.morraInfo.player1Winn.size());
 									System.out.println("arraySize1 data: "+ data.player1Winn.size());
+									
 									if(client.morraInfo.player1Winn.size()==3) 
 									{
 										listItems.getItems().add("Player 1 WON THE GAME");
@@ -242,11 +249,11 @@ public class TheGameOfMorra extends Application {
 			imageThree.setEffect(colorAdjust1);
 			imageFour.setEffect(colorAdjust1);
 			imageFive.setEffect(colorAdjust1);
-			
-			
-	 		client.send(client.morraInfo); 	
 	 		tf.setDisable(true);
 	 		GuessButton.setDisable(true);
+			
+	 		client.send(client.morraInfo); 	
+
 		});
 		
 		
