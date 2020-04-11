@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,6 +15,9 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -32,12 +36,12 @@ public class TheGameOfMorra extends Application {
 	Server server;
 	ListView<String> listItems;
 	MorraInfo morraInfo ;
-	//TextField tf;
+	
 	TextField portText;
 	VBox whoWon ;
 	boolean printedP1 = false;
 	boolean printedP2 = false;
-	
+	VBox vBoxRules ;
 	
 	boolean p1Guessed = false;
 	boolean p2Guessed = false;
@@ -50,7 +54,7 @@ public class TheGameOfMorra extends Application {
 	{
 		
 		BorderPane pane = new BorderPane();
-		///tf              = new TextField();
+		
 		
 		turnOnServer    = new Button("Turn on Server");	
 		portText        = new TextField("5555");
@@ -65,6 +69,7 @@ public class TheGameOfMorra extends Application {
 		turnOnServer.setMinWidth(100);
 
 		
+		vBoxRules = new VBox();
 		//-fx-background-color: transparent;
 
 		primaryStage.setTitle("(Server) Let's Play Morra!!!");
@@ -75,6 +80,24 @@ public class TheGameOfMorra extends Application {
 			primaryStage.setScene(sceneMap.get("server"));
 			primaryStage.setTitle("This is the Server");
 			listItems.getItems().add("Server is ON");
+			
+			
+			Label rules = new Label( );
+			rules.setText("Rules: \n" +
+						  "* Turn on 2 players first \n" +
+						  "* Enter your guess number from 1-10 \n" +
+						  "* Click on the finger image to play \n" +
+						  "* Once the round is complete, press the play \n "
+						  + " next round button for both players \n"
+					);
+			rules.setTextFill(Color.web("GREENYELLOW", 1.0));
+			rules.setFont(Font.font("Times", FontWeight.BOLD,20));
+			vBoxRules.getChildren().addAll(rules);
+					
+					
+					
+					
+					
 			server = new Server(data -> 
 			{
 				Platform.runLater(()->
@@ -213,10 +236,10 @@ public class TheGameOfMorra extends Application {
 		//listItems.setStyle("-fx-background-color: Red;");
 		listItems.setStyle("-fx-background-insets: 0 ;");
 		
-		listItems.setPrefSize(150, 100);
+		listItems.setPrefSize(170, 100);
 		
 		pane.setLeft(listItems);
-		//pane.setRight(tf);
+		pane.setRight(vBoxRules);
 		//pane.setLeft(evaluate);
 		pane.setCenter(whoWon);
 		return new Scene(pane, 600, 400);

@@ -1,6 +1,5 @@
 import javafx.scene.control.Label;
 import java.util.HashMap;
-
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -23,9 +22,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.effect.ColorAdjust;
 
-public class TheGameOfMorra extends Application {
-
-
+public class TheGameOfMorra extends Application 
+{
+	
 	public static void main(String[] args) 
 	{
 		launch(args);
@@ -50,6 +49,9 @@ public class TheGameOfMorra extends Application {
 	Button exit;
 	boolean p1played = false;
 	boolean p2played = false;
+	boolean isPrinted = false;
+	boolean isQuit = false;
+	
 	Label labelP1; 
 	Label labelP2; 
 	Label winnerLabelP1;
@@ -57,7 +59,7 @@ public class TheGameOfMorra extends Application {
 	ColorAdjust colorAdjust;
 	ColorAdjust colorAdjust1;
 	
-	//feel free to remove the starter code from this method
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
@@ -149,8 +151,16 @@ public class TheGameOfMorra extends Application {
 		
 		exit.setOnAction(e->
 		{
-			System.out.println("Client is closed");
+			System.out.println("Client closed");
+			
+			//if(isPrinted == true)
+			//{
+				listItems.getItems().add("Opponent has Quit");
+			//}
+			
+			
 			primaryStage.close();
+			//isQuit = true;
 		});
 		
 		
@@ -164,11 +174,20 @@ public class TheGameOfMorra extends Application {
 				client = new Client(ipString, port1,morraInfo, data->
 				{
 					countclient++;
+
 					
 					Platform.runLater(()->
 					{	
+
 						if(data.have2players == true )
 						{
+ 
+							if(isPrinted == false) 
+							{
+								listItems.getItems().add("Opponent has joined");
+								isPrinted = true;
+							}
+							
 							if( (data.getP1Guess() != 0) && 
 								(data.getP2Guess() != 0) && 
 								(p1played==false)        &&
@@ -352,6 +371,12 @@ public class TheGameOfMorra extends Application {
 								}
 							}
 						}
+						if((data.have2players == false) && (isQuit==false))
+						{
+							listItems.getItems().add("Only one player...waiting for other player");
+							isQuit = true;
+						}
+						
 					}); 
 				}); 
 				
