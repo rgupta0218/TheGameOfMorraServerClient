@@ -44,7 +44,7 @@ public class TheGameOfMorra extends Application {
 	MorraInfo morraInfo;
 	VBox move = new VBox();
 	HBox fingersBox;
-	VBox clientBox, whoWon;
+	VBox clientBox, whoWon, scoreBox;
 	Button playNextRoound;
 	Button playNextGame;
 	Button exit;
@@ -52,6 +52,8 @@ public class TheGameOfMorra extends Application {
 	boolean p2played = false;
 	Label labelP1; 
 	Label labelP2; 
+//	Label winnerLabelP1;
+//	Label winnerLabelP2;
 	
 	
 	//feel free to remove the starter code from this method
@@ -69,7 +71,7 @@ public class TheGameOfMorra extends Application {
 		GuessButton = new Button("Guess"); 
 		whoWon = new VBox();
 		whoWon.setTranslateX(100); 
-		  
+		scoreBox = new VBox(); 
 		
 		port.setPrefWidth(120);
 		port.setMaxWidth(120);
@@ -327,6 +329,12 @@ public class TheGameOfMorra extends Application {
 									client.morraInfo.player1Winn.add(1);
 									System.out.println("arraySize P1: "+ client.morraInfo.player1Winn.size());
 									System.out.println("arraySize P1 data: "+ data.player1Winn.size());
+//									
+//								    winnerLabelP1 = new Label("Player1: 1"); 
+//								    winnerLabelP1.setTextFill(Color.web("RED", 1.0));
+//								    winnerLabelP1.setFont(Font.font("Times", FontWeight.BOLD,15));
+//									scoreBox.getChildren().addAll(winnerLabelP1);
+//									
 									
 									if(client.morraInfo.player1Winn.size()==3) 
 									{
@@ -342,6 +350,12 @@ public class TheGameOfMorra extends Application {
 								else if(data.winner() == 2)
 								{
 									listItems.getItems().add("Player 2 WON THE ROUND");
+									
+//								    winnerLabelP2 = new Label("Player2: 1"); 
+//								    winnerLabelP2.setTextFill(Color.web("RED", 1.0));
+//								    winnerLabelP2.setFont(Font.font("Times", FontWeight.BOLD,15));
+//									scoreBox.getChildren().addAll(winnerLabelP2); 
+									
 									System.out.println("arraySize P2: "+ data.player2Winn.size());
 									if(data.player2Winn.size()==18) 
 									{
@@ -578,10 +592,16 @@ public class TheGameOfMorra extends Application {
 		listItems.setPrefSize(50, 100); 
 		
 		whoWon.setTranslateX(0);
+		scoreBox.setTranslateX(-25);
+		scoreBox.setTranslateY(-55);
+		
+		
+		
 		BorderPane pane1 = new BorderPane();
 		pane1.setTop(clientBox);
 		pane1.setBottom(listItems);
 		pane1.setCenter(whoWon);
+		pane1.setRight(scoreBox);
 		
 		
 		Image image = new Image("back2.jpeg");
