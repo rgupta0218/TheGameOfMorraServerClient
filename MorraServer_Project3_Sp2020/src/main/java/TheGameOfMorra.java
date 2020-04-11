@@ -19,6 +19,8 @@ import javafx.stage.WindowEvent;
 
 public class TheGameOfMorra extends Application {
 
+	int P1TotalWin = 0;
+	int P2TotalWin = 0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -133,12 +135,11 @@ public class TheGameOfMorra extends Application {
 							
 						 	if(data.winner() == 1)
 							{
-						
 								listItems.getItems().add("Player 1 WON THIS ROUND");
 								data.player1Winn.add(1);
+								P1TotalWin ++;
 								
-								
-								if(data.player1Winn.size()==2) 
+								if(P1TotalWin == 2) 
 								{
 									System.out.println("Size p1 array" + data.player1Winn.size());
 									listItems.getItems().add("Player 1 WON THE GAME");
@@ -198,7 +199,7 @@ public class TheGameOfMorra extends Application {
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
-	}//Hi
+	}
 
 	public Scene createServerGui( ) 
 	{

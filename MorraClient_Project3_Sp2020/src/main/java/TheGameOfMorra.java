@@ -25,6 +25,8 @@ import javafx.scene.effect.ColorAdjust;
 
 public class TheGameOfMorra extends Application {
 
+	int P1TotalWin = 0;
+	int P2TotalWin = 0;
 	public static void main(String[] args) 
 	{
 		launch(args);
@@ -40,6 +42,7 @@ public class TheGameOfMorra extends Application {
 	ImageView imageOne, imageTwo, imageThree, imageFour, imageFive; 
 	
 	ImageView imageOne1, imageTwo2, imageThree3, imageFour4, imageFive5; 
+	//ImageView imageOne11,imageTwo22,imageThree33,image,imageTwo22 ;
 	
 	MorraInfo morraInfo;
 	VBox move = new VBox();
@@ -95,56 +98,30 @@ public class TheGameOfMorra extends Application {
 		
         
 		Image finger1 = new Image("one.png");
-		imageOne = new ImageView(finger1);
-        
 		Image finger2 = new Image("two.png");
-		imageTwo = new ImageView(finger2);
-
 		Image finger3 = new Image("three.png");
-		imageThree = new ImageView(finger3);
-		
 		Image finger4 = new Image("four.jpeg");
-		imageFour = new ImageView(finger4);
-		
 		Image finger5 = new Image("five.jpeg");
+		
+		imageOne = new ImageView(finger1);		
+		imageTwo = new ImageView(finger2);		
+		imageThree = new ImageView(finger3);
+		imageFour = new ImageView(finger4);
 		imageFive = new ImageView(finger5);
 		
+//		imageOne1 = new ImageView(finger1);
+//		imageTwo2 = new ImageView(finger2);
+//		imageThree3 = new ImageView(finger3);
+//		imageFour4 = new ImageView(finger4);
+//		imageFive5 = new ImageView(finger5);
 		
-		Image finger12 = new Image("one.png");
-		imageOne1 = new ImageView(finger12);
-        
-		Image finger22 = new Image("two.png");
-		imageTwo2 = new ImageView(finger22);
-
-		Image finger32 = new Image("three.png");
-		imageThree3 = new ImageView(finger32);
+//		imageOne11 = new ImageView(finger1);
+//		imageTwo22 = new ImageView(finger2);
+//		imageThree33 = new ImageView(finger3);
+//		imageFour44 = new ImageView(finger4);
+//		imageFive55 = new ImageView(finger5);
 		
-		Image finger42 = new Image("four.jpeg");
-		imageFour4 = new ImageView(finger42);
-		
-		Image finger55 = new Image("five.jpeg");
-		imageFive5 = new ImageView(finger55);
-		
-		
-		imageOne1.setFitHeight(100);
-		imageOne1.setFitWidth(150);
-		imageOne1.setPreserveRatio(true);
-		
-		imageTwo2.setFitHeight(100);
-		imageTwo2.setFitWidth(150);
-		imageTwo2.setPreserveRatio(true);
-		
-		imageThree3.setFitHeight(100);
-		imageThree3.setFitWidth(150);
-		imageThree3.setPreserveRatio(true);
-		
-		imageFour4.setFitHeight(100);
-		imageFour4.setFitWidth(150);
-		imageFour4.setPreserveRatio(true);
-		
-		imageFive5.setFitHeight(100);
-		imageFive5.setFitWidth(150);
-		imageFive5.setPreserveRatio(true);
+//		eRatio(true);
 		
 		playNextRoound = new Button("Play next round");
 		playNextRoound.setDisable(true);
@@ -187,11 +164,9 @@ public class TheGameOfMorra extends Application {
 		
 		playNextGame.setOnAction(e->
 		{
-			
-			
-			
+			myclear();
+			primaryStage.show();
 		});
-		
 		
 		exit.setOnAction(e->
 		{
@@ -200,15 +175,12 @@ public class TheGameOfMorra extends Application {
 		});
 		
 		
-		
-		
 		TurnOnClient.setOnAction(e-> 
 		{
 				primaryStage.setScene(sceneMap.get("client"));
 				primaryStage.setTitle("This is a client");
 				String ipString = ipAdd.getText();
 				int port1 = Integer.parseInt(port.getText()); 
-
 				
 				client = new Client(ipString, port1,morraInfo, data->
 				{
@@ -237,16 +209,19 @@ public class TheGameOfMorra extends Application {
 								
 								if(data.getp1Plays() == 1)
 								{
-								    labelP1 = new Label("<-- player 1 ",imageOne1); 
+									ImageView imageView1 = new ImageView(finger1);
+									imageViewFunc(imageView1); 
+									labelP1 = new Label("<-- player 1 ",imageView1); 
 									labelP1.setTextFill(Color.web("Red", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
-									
 								}
 								
 								else if(data.getp1Plays() == 2)
 								{
-								    labelP1 = new Label("<-- player 1  ",imageTwo2); 
+									ImageView imageView2 = new ImageView(finger2);
+									imageViewFunc(imageView2); 
+								    labelP1 = new Label("<-- player 1  ",imageView2); 
 									labelP1.setTextFill(Color.web("Red", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
@@ -254,16 +229,19 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp1Plays() == 3)
 								{
-								    labelP1 = new Label("<-- player 1  ",imageThree3); 
+									ImageView imageView3 = new ImageView(finger3);
+									imageViewFunc(imageView3);
+								    labelP1 = new Label("<-- player 1  ",imageView3); 
 									labelP1.setTextFill(Color.web("Red", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
 								}
-
 								
 								else if(data.getp1Plays() == 4)
 								{
-								    labelP1 = new Label("<-- player 1  ",imageFour4); 
+									ImageView imageView4 = new ImageView(finger4);
+									imageViewFunc(imageView4);
+								    labelP1 = new Label("<-- player 1  ",imageView4); 
 									labelP1.setTextFill(Color.web("Red", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
@@ -271,17 +249,19 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp1Plays() == 5)
 								{
-								    labelP1 = new Label("<-- player 1  ",imageFive5); 
+									ImageView imageView5 = new ImageView(finger5);
+									imageViewFunc(imageView5);
+								    labelP1 = new Label("<-- player 1  ",imageView5); 
 									labelP1.setTextFill(Color.web("Red", 1.0));
 									labelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP1);
 								}
 								
-								
-								
 								if(data.getp2Plays() == 1)
 								{
-								    labelP2 = new Label("<-- player 2 ",imageOne1); 
+									ImageView imageView1 = new ImageView(finger1);
+									imageViewFunc(imageView1); 
+								    labelP2 = new Label("<-- player 2 ",imageView1); 
 									labelP2.setTextFill(Color.web("CYAN", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
@@ -289,7 +269,9 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp2Plays() == 2)
 								{
-								    labelP2 = new Label("<-- player 2 ",imageTwo2); 
+									ImageView imageView2 = new ImageView(finger2);
+									imageViewFunc(imageView2);
+								    labelP2 = new Label("<-- player 2 ",imageView2); 
 									labelP2.setTextFill(Color.web("CYAN", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
@@ -297,7 +279,9 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp2Plays() == 3)
 								{
-								    labelP2 = new Label("<-- player 2 ",imageThree3); 
+									ImageView imageView3 = new ImageView(finger3);
+									imageViewFunc(imageView3);
+								    labelP2 = new Label("<-- player 2 ",imageView3); 
 									labelP2.setTextFill(Color.web("CYAN", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
@@ -305,7 +289,9 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp2Plays() == 4)
 								{
-								    labelP2 = new Label("<-- player 2 ",imageFour4); 
+									ImageView imageView4 = new ImageView(finger4);
+									imageViewFunc(imageView4);
+								    labelP2 = new Label("<-- player 2 ",imageView4); 
 									labelP2.setTextFill(Color.web("CYAN", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
@@ -313,15 +299,13 @@ public class TheGameOfMorra extends Application {
 								
 								else if(data.getp2Plays() == 5)
 								{
-								    labelP2 = new Label("<-- player 2 ",imageFive5); 
+									ImageView imageView5 = new ImageView(finger5);
+									imageViewFunc(imageView5);
+								    labelP2 = new Label("<-- player 2 ",imageView5); 
 									labelP2.setTextFill(Color.web("CYAN", 1.0));
 									labelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 									whoWon.getChildren().addAll(labelP2);
 								}
-								
-								
-								
-
 								
 								if(data.winner() == 1)
 								{
@@ -329,14 +313,14 @@ public class TheGameOfMorra extends Application {
 									client.morraInfo.player1Winn.add(1);
 									System.out.println("arraySize P1: "+ client.morraInfo.player1Winn.size());
 									System.out.println("arraySize P1 data: "+ data.player1Winn.size());
-//									
+									P1TotalWin++;
 //								    winnerLabelP1 = new Label("Player1: 1"); 
 //								    winnerLabelP1.setTextFill(Color.web("RED", 1.0));
 //								    winnerLabelP1.setFont(Font.font("Times", FontWeight.BOLD,15));
 //									scoreBox.getChildren().addAll(winnerLabelP1);
 //									
 									
-									if(client.morraInfo.player1Winn.size()==3) 
+									if(P1TotalWin==2) 
 									{
 										listItems.getItems().add("Player 1 WON THE GAME");
 										playNextRoound.setDisable(true); 
@@ -350,14 +334,14 @@ public class TheGameOfMorra extends Application {
 								else if(data.winner() == 2)
 								{
 									listItems.getItems().add("Player 2 WON THE ROUND");
-									
+									P2TotalWin++;
 //								    winnerLabelP2 = new Label("Player2: 1"); 
 //								    winnerLabelP2.setTextFill(Color.web("RED", 1.0));
 //								    winnerLabelP2.setFont(Font.font("Times", FontWeight.BOLD,15));
 //									scoreBox.getChildren().addAll(winnerLabelP2); 
 									
 									System.out.println("arraySize P2: "+ data.player2Winn.size());
-									if(data.player2Winn.size()==18) 
+									if(P2TotalWin ==2) 
 									{
 										listItems.getItems().add("Player 2 WON THE GAME");
 										playNextRoound.setDisable(true); 
@@ -424,9 +408,10 @@ public class TheGameOfMorra extends Application {
 
 
 		//finger 1
-		imageOne.setFitHeight(100);
-		imageOne.setFitWidth(150);
-		imageOne.setPreserveRatio(true);
+		imageViewFunc(imageOne);
+//		imageOne.setFitHeight(100);
+//		imageOne.setFitWidth(150);
+//		imageOne.setPreserveRatio(true);
 		imageOne.setDisable(true);
 		imageOne.setEffect(colorAdjust);
 		imageOne.setOnMouseClicked(e->
@@ -450,9 +435,7 @@ public class TheGameOfMorra extends Application {
 		 
 		
 		//finger 2
-		imageTwo.setFitHeight(100);
-		imageTwo.setFitWidth(150);
-		imageTwo.setPreserveRatio(true);
+		imageViewFunc(imageTwo);
 		imageTwo.setDisable(true);
 		imageTwo.setEffect(colorAdjust);
 		imageTwo.setOnMouseClicked(e->
@@ -476,9 +459,7 @@ public class TheGameOfMorra extends Application {
 		
 		
 		//finger 3
-		imageThree.setFitHeight(100);
-		imageThree.setFitWidth(150);
-		imageThree.setPreserveRatio(true);
+		imageViewFunc(imageThree);
 		imageThree.setDisable(true);
 		imageThree.setEffect(colorAdjust);
 		imageThree.setOnMouseClicked(e->
@@ -500,9 +481,7 @@ public class TheGameOfMorra extends Application {
 		
 		
 		//finger 4
-		imageFour.setFitHeight(100);
-		imageFour.setFitWidth(150);
-		imageFour.setPreserveRatio(true);
+		imageViewFunc(imageFour);
 		imageFour.setDisable(true);
 		imageFour.setEffect(colorAdjust);
 		imageFour.setOnMouseClicked(e->
@@ -524,9 +503,7 @@ public class TheGameOfMorra extends Application {
 		
 		
 		//finger 5
-		imageFive.setFitHeight(100);
-		imageFive.setFitWidth(150);
-		imageFive.setPreserveRatio(true);
+		imageViewFunc(imageFive);
 		imageFive.setDisable(true);
 		imageFive.setEffect(colorAdjust);
 		imageFive.setOnMouseClicked(e->
@@ -546,7 +523,6 @@ public class TheGameOfMorra extends Application {
 	 		
 		});
 		
-		
 		sceneMap = new HashMap<String, Scene>();
 		sceneMap.put("client", createClientGui());
 		
@@ -562,6 +538,14 @@ public class TheGameOfMorra extends Application {
 		primaryStage.show();
 	}
 
+	
+	public void imageViewFunc(ImageView imageView)
+	{
+		imageView.setFitHeight(100);
+		imageView.setFitWidth(150);
+		imageView.setPreserveRatio(true);
+	}
+	
 	public void imageDisable() 
 	{
 		imageOne.setDisable(true);
@@ -578,6 +562,37 @@ public class TheGameOfMorra extends Application {
 		imageThree.setDisable(false);
 		imageFour.setDisable(false);
 		imageFive.setDisable(false);
+	}
+	
+	public void myclear()
+	{
+		client.morraInfo.setp1Plays(0);
+		client.morraInfo.setp2Plays(0);
+		client.morraInfo.setP1Guess(0);
+		client.morraInfo.setP2Guess(0);
+		p1played=false;
+		p2played=false;
+		tf.clear();
+		tf.setDisable(false);
+		GuessButton.setDisable(false);
+		listItems.getItems().clear();
+		playNextRoound.setDisable(true);
+		ColorAdjust colorAdjust = new ColorAdjust();
+	    colorAdjust.setBrightness(-0.5);
+		imageOne.setEffect(colorAdjust);
+		imageTwo.setEffect(colorAdjust);
+		imageThree.setEffect(colorAdjust);
+		imageFour.setEffect(colorAdjust);
+		imageFive.setEffect(colorAdjust);
+		imageOne.setDisable(true);
+		imageTwo.setDisable(true);
+		imageThree.setDisable(true);
+		imageFour.setDisable(true);
+		imageFive.setDisable(true);
+		labelP1.setText("");
+		labelP2.setText("");
+		labelP1.setGraphic(null);
+		labelP2.setGraphic(null);
 	}
 	
 	
