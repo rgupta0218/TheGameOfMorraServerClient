@@ -103,31 +103,45 @@ public class TheGameOfMorra extends Application {
 						else if((data.getp2Plays() != 0) && (data.getP2() == 3))
 						{
 							listItems.getItems().add("Player 2 played "+data.getp2Plays());
-							
-							if(server.morraInfo.winner() == 1)
+							if(data.winner() == 1)
 							{
-								Label label = new Label("Player 1 WON");
-							    label.setTextFill(Color.web("Blue", 1.0));
-								label.setFont(Font.font("Times", FontWeight.BOLD,40)); 
+//								Label label = new Label("Player 1 WON");
+//							    label.setTextFill(Color.web("Blue", 1.0));
+//								label.setFont(Font.font("Times", FontWeight.BOLD,40)); 
 								listItems.getItems().add("Player 1 WON");
+								data.player1Winn.add(1);
+								
+								if(data.player1Winn.size()==2) 
+								{
+									listItems.getItems().add("Player 1 WON THE GAME");
+								}
 								//whoWon.getChildren().add(label);
+							
 							}
 							
-							else if(server.morraInfo.winner() == 2)
+							else if(data.winner() == 2)
 							{
-								Label label = new Label("Player 2 WON");
-							    label.setTextFill(Color.web("Blue", 1.0));
-								label.setFont(Font.font("Times", FontWeight.BOLD,20));
+//								Label label = new Label("Player 2 WON");
+//							    label.setTextFill(Color.web("Blue", 1.0));
+//								label.setFont(Font.font("Times", FontWeight.BOLD,20));
 								listItems.getItems().add("Player 2 WON");
+								data.player2Winn.add(1);
+								
+								if(data.player2Winn.size()==2) 
+								{
+									listItems.getItems().add("Player 1 WON THE GAME");
+								}
+								
 								//whoWon.getChildren().add(label);
 							}
 							
 							else 
 							{
-								Label label = new Label("No one WON");
-							    label.setTextFill(Color.web("Black", 1.0));
-								label.setFont(Font.font("Times", FontWeight.BOLD,20));
+//								Label label = new Label("No one WON");
+//							    label.setTextFill(Color.web("Black", 1.0));
+//								label.setFont(Font.font("Times", FontWeight.BOLD,20)); 
 								listItems.getItems().add("No one WON");
+								
 								//whoWon.getChildren().add(label);
 							}
 						} 
@@ -164,11 +178,11 @@ public class TheGameOfMorra extends Application {
 		Image image = new Image("back.jpg");
 		BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
 		pane.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,BackgroundPosition.CENTER,bSize)));
-		Scene scene = new Scene(pane,831,530);
+		Scene scene = new Scene(pane,631,430);
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
-	}
+	}//Hi
 
 	public Scene createServerGui( ) 
 	{

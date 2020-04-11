@@ -150,9 +150,8 @@ public class Server
 						    	morraInfo = morraInfoClient;
 						    	callback.accept(morraInfo);
 						   
-						    	//callback.accept("client: " + count + " sent: " + data); 
+						    	//callback.accept("client: " + count + " sent: " ); 
 						    	//updateClients("client #"+count+" said: "+data);
-						    	
 						    	
 						     	if(count == 1)
 						    	{
@@ -166,7 +165,8 @@ public class Server
 						    		System.out.println("client: " + count + " sent " + morraInfo.getp2Plays());
 						    	}
 						    	
-						     	update2Players(morraInfo); 
+						     	//update2Players(morraInfo); 
+						     	updateClients(morraInfo); 
 						    	connection.setTcpNoDelay(true);
 						    }
 						    

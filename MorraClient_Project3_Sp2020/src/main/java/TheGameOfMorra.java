@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -37,11 +38,13 @@ public class TheGameOfMorra extends Application {
 	ListView<String>  listItems;
 	Button TurnOnClient, GuessButton, finger1,finger2,finger3,finger4,finger5;
 	TextField tf, port, ipAdd;
-	ImageView imageOne, imageTwo, imageThree, imageFour, imageFive;
+	ImageView imageOne, imageTwo, imageThree, imageFour, imageFive; 
 	MorraInfo morraInfo;
 	VBox move = new VBox();
 	HBox fingersBox;
 	VBox clientBox, whoWon;
+
+	
 	
 	
 	//feel free to remove the starter code from this method
@@ -111,10 +114,11 @@ public class TheGameOfMorra extends Application {
 					
 					Platform.runLater(()->
 					{	
-						if(data.have2players == true)
+						if((data.have2players == true) && (data.winner() == 0 || data.winner() == 1 || data.winner() == 2))
 						{
 							if( (data.getP1Guess() !=0) && (data.getp1Plays() ==0 ))
 							{
+								
 								listItems.getItems().add("Player 1 guessed "+ data.getP1Guess());
 							}
 							
@@ -127,47 +131,65 @@ public class TheGameOfMorra extends Application {
 							{
 								listItems.getItems().add("Player 2 played "+data.getp2Plays());
 								//int x = data.getp2Plays();
-								Label label1 = new Label();
-								label1.setPrefSize(20, 20);
-								label1.setGraphic(new ImageView(finger1));
-								whoWon.getChildren().add(label1);
+//								Label label1 = new Label();
+//								label1.setPrefSize(20, 20);
+//								label1.setGraphic(new ImageView(finger1));
+								//whoWon.getChildren().add(label1);
 								
-								if(client.morraInfo.winner() == 1)
-								{
-									Label label = new Label("Player 1 WON");
-								    label.setTextFill(Color.web("Blue", 1.0));
-									label.setFont(Font.font("Times", FontWeight.BOLD,40)); 
-									listItems.getItems().add("Player 1 WON");
-									//whoWon.getChildren().add(label);
-								}
-								
-								else if(client.morraInfo.winner() == 2)
-								{
-									Label label = new Label("Player 2 WON");
-								    label.setTextFill(Color.web("Blue", 1.0));
-									label.setFont(Font.font("Times", FontWeight.BOLD,20));
-									listItems.getItems().add("Player 2 WON");
-									//whoWon.getChildren().add(label);
-								}
-								
-								else 
-								{
-									Label label = new Label("No one WON");
-								    label.setTextFill(Color.web("Black", 1.0));
-									label.setFont(Font.font("Times", FontWeight.BOLD,20)); 
-									listItems.getItems().add("No one WON");
-									//whoWon.getChildren().add(label);
-								}
+//								if(data.winner() == 1)
+//								{
+////									Label label = new Label("Player 1 WON");
+////								    label.setTextFill(Color.web("Blue", 1.0));
+////									label.setFont(Font.font("Times", FontWeight.BOLD,40)); 
+//									listItems.getItems().add("Player 1 WON");
+//									data.player1Winn.add(1);
+//									
+//									if(data.player1Winn.size()==2) 
+//									{
+//										listItems.getItems().add("Player 1 WON THE GAME");
+//									}
+//									//whoWon.getChildren().add(label);
+//									GuessButton.setDisable(false);
+//									imageDisableFalse();
+//								}
+//								
+//								else if(data.winner() == 2)
+//								{
+////									Label label = new Label("Player 2 WON");
+////								    label.setTextFill(Color.web("Blue", 1.0));
+////									label.setFont(Font.font("Times", FontWeight.BOLD,20));
+//									listItems.getItems().add("Player 2 WON");
+//									data.player2Winn.add(1);
+//									
+//									if(data.player2Winn.size()==2) 
+//									{
+//										listItems.getItems().add("Player 1 WON THE GAME");
+//									}
+//									GuessButton.setDisable(false);
+//									imageDisableFalse();
+//									//whoWon.getChildren().add(label);
+//								}
+//								
+//								else 
+//								{
+////									Label label = new Label("No one WON");
+////								    label.setTextFill(Color.web("Black", 1.0));
+////									label.setFont(Font.font("Times", FontWeight.BOLD,20)); 
+//									listItems.getItems().add("No one WON");
+//									GuessButton.setDisable(false);
+//									imageDisableFalse();
+//									//whoWon.getChildren().add(label);
+//								}
 							} 
 							
 							else if((data.getp1Plays() != 0) && (data.getP1() == 1)) 
 							{
 								listItems.getItems().add("Player 1 played "+data.getp1Plays());
 								//int x = data.getp2Plays();
-								Label label1 = new Label();
-								label1.setPrefSize(4, 4);
-								label1.setGraphic(new ImageView(finger1));
-								whoWon.getChildren().add(label1);
+//								Label label1 = new Label();
+//								label1.setPrefSize(4, 4);
+//								label1.setGraphic(new ImageView(finger1));
+								//whoWon.getChildren().add(label1);
 							}
 						}
 					}); 
@@ -365,6 +387,15 @@ public class TheGameOfMorra extends Application {
 		imageFive.setDisable(true);
 	}
 	
+	public void imageDisableFalse() 
+	{
+		imageOne.setDisable(false);
+		imageTwo.setDisable(false);
+		imageThree.setDisable(false);
+		imageFour.setDisable(false);
+		imageFive.setDisable(false);
+	}
+	
 	
 	
 	public Scene createClientGui() 
@@ -379,7 +410,7 @@ public class TheGameOfMorra extends Application {
 		BorderPane pane1 = new BorderPane();
 		pane1.setTop(clientBox);
 		pane1.setBottom(listItems);
-		pane1.setCenter(whoWon);
+		//pane1.setCenter(whoWon);
 		//pane1.setBottom(move); 
 		Image image = new Image("back2.jpeg");
 		BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);

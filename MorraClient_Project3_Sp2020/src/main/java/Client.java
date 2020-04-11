@@ -34,7 +34,7 @@ public class Client extends Thread{
 		    out = new ObjectOutputStream(socketClient.getOutputStream());
 		    in = new ObjectInputStream(socketClient.getInputStream());
 		    socketClient.setTcpNoDelay(true);
-		    
+		     
 			 
 			try {
 				   this.morraInfo = (MorraInfo) in.readObject();
