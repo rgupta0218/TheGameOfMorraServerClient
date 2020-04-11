@@ -107,9 +107,9 @@ public class Server
 				 {
 					clients.get(game.getP1()).out.writeObject(game);
 					clients.get(game.getP2()).out.writeObject(game);
-					MorraInfo rest = new MorraInfo();
+					//MorraInfo rest = new MorraInfo();
 					//rest.clientHolder.addAll(game.clientHolder);
-					updateClients(rest);
+					//updateClients(rest);
 					
 				 }
 				 catch(Exception e) 
@@ -167,7 +167,7 @@ public class Server
 						    	
 						     	//update2Players(morraInfo); 
 						     	updateClients(morraInfo); 
-						    	connection.setTcpNoDelay(true);
+						    	connection.setTcpNoDelay(true); 
 						    }
 						    
 						    catch(Exception e) 

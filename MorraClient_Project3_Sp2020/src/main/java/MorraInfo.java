@@ -26,8 +26,8 @@ public class MorraInfo implements Serializable
 	ArrayList<Integer> clientHolder = new ArrayList<Integer>(0);
 	
 	
-	ArrayList<Integer> player1Winn = new ArrayList<Integer>();
-	ArrayList<Integer> player2Winn = new ArrayList<Integer>();
+	ArrayList<Integer> player1Winn = new ArrayList<Integer>();;
+	ArrayList<Integer> player2Winn = new ArrayList<Integer>();;
 	
 	MorraInfo()  
 	{
@@ -39,6 +39,7 @@ public class MorraInfo implements Serializable
 		p2Points = 0;
 		p1Plays =  0;
 		p2Plays =  0;
+
 		
 		have2players = false;
 	}
@@ -135,7 +136,7 @@ public class MorraInfo implements Serializable
 			System.out.println("p2 plays: " + getp2Plays());
 			System.out.println("P1 guess: " + getP1Guess());
 			System.out.println("P2 guess: " + getP2Guess());
-			player1Winn.add(1);
+			
 			return 1;
 		} 
 		
@@ -146,7 +147,7 @@ public class MorraInfo implements Serializable
 			System.out.println("p2 plays: " + getp2Plays());
 			System.out.println("P1 guess: " + getP1Guess()); 
 			System.out.println("P2 guess: " + getP2Guess()); 
-			player2Winn.add(1);
+			
 			return 2;
 		}
 		else {

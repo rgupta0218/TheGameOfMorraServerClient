@@ -1,10 +1,9 @@
-import java.util.HashMap; 
+import java.util.HashMap;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -15,9 +14,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -78,6 +74,7 @@ public class TheGameOfMorra extends Application {
 					if((server.morraInfo.getP1() == 1) && (printedP1 == false))
 					{
 						listItems.getItems().add("Player 1 joined ");
+						listItems.getItems().add("Waiting for player 2.... ");
 						printedP1 = true;
 					}
 					
@@ -111,8 +108,10 @@ public class TheGameOfMorra extends Application {
 								listItems.getItems().add("Player 1 WON");
 								data.player1Winn.add(1);
 								
+								
 								if(data.player1Winn.size()==2) 
 								{
+									System.out.println("Size p1 array" + data.player1Winn.size());
 									listItems.getItems().add("Player 1 WON THE GAME");
 								}
 								//whoWon.getChildren().add(label);
@@ -129,7 +128,7 @@ public class TheGameOfMorra extends Application {
 								
 								if(data.player2Winn.size()==2) 
 								{
-									listItems.getItems().add("Player 1 WON THE GAME");
+									listItems.getItems().add("Player 2 WON THE GAME");
 								}
 								
 								//whoWon.getChildren().add(label);
@@ -193,10 +192,10 @@ public class TheGameOfMorra extends Application {
 		BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
 		pane.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,BackgroundPosition.CENTER,bSize)));
 		
-		listItems.setStyle("-fx-background-color: Red;");
+		//listItems.setStyle("-fx-background-color: Red;");
 		listItems.setStyle("-fx-background-insets: 0 ;");
 		
-		listItems.setPrefSize(120, 100);
+		listItems.setPrefSize(150, 100);
 		
 		
 		pane.setLeft(listItems);
