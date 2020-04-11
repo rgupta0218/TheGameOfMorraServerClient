@@ -150,21 +150,7 @@ public class Server
 						    	morraInfo = morraInfoClient;
 						    	callback.accept(morraInfo);
 						   
-						    	//callback.accept("client: " + count + " sent: " ); 
-						    	//updateClients("client #"+count+" said: "+data);
-						    	
-						     	if(count == 1)
-						    	{
-						    		//System.out.println("Client:" + count + " " + morraInfo.getP1());
-						    		System.out.println("client: " + count + " sent " + morraInfo.getp1Plays());
-						    	}
-						    	
-						    	
-						     	else if(count==2)
-						    	{
-						    		System.out.println("client: " + count + " sent " + morraInfo.getp2Plays());
-						    	}
-						    	
+	
 						     	//update2Players(morraInfo); 
 						     	updateClients(morraInfo); 
 						    	connection.setTcpNoDelay(true); 
@@ -173,13 +159,15 @@ public class Server
 						    catch(Exception e) 
 						    {
 						    	System.out.print(e);
-						    	//callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
 						    	updateClients(morraInfo); 
 						    	clients.remove(this);
 						    	break;
 						    }
 
 					}
+				 
 				}//end of run
+			
 		}//end of client thread
+		
 }

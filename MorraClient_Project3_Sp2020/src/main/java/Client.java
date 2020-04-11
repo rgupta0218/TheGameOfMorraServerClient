@@ -36,14 +36,13 @@ public class Client extends Thread{
 		    socketClient.setTcpNoDelay(true);
 		     
 			 
-			try {
-				   this.morraInfo = (MorraInfo) in.readObject();
-				   clientNumber=morraInfo.clientHolder.lastIndexOf(1);
-				   
-				   callback.accept(morraInfo);
+			try 
+			{
+				this.morraInfo = (MorraInfo) in.readObject();
+				clientNumber=morraInfo.clientHolder.lastIndexOf(1);
+				callback.accept(morraInfo);
 			}
 			catch(Exception e) {}
-			
 			send(morraInfo);
 			
 		}
@@ -51,25 +50,25 @@ public class Client extends Thread{
 			
 			while(true)
 			{
-				try {
+				try 
+				{
 					MorraInfo morraInfo2 = (MorraInfo)in.readObject();
 					this.morraInfo = morraInfo2;
-					callback.accept(morraInfo2);
-					
-					
-				} catch (Exception e) {}
+					callback.accept(morraInfo2);					
+				}
+				catch (Exception e) {}
 			}
 	
     }
 	
 	public void send(MorraInfo morraInfo) {  
 		
-		try {
-			System.out.println("Inside client send");
+		try 
+		{	
 			out.writeObject(morraInfo);
 			out.reset();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) 
+		{	
 			e.printStackTrace();
 		}
 	}

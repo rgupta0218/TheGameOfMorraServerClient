@@ -91,6 +91,7 @@ public class TheGameOfMorra extends Application {
 						printedP2 = true;
 					}
 					
+					
 					if(data.have2players == true)
 					{
 						if((data.getP1Guess() !=0) && (data.getp1Plays()==0) && (p1Guessed==false)) 

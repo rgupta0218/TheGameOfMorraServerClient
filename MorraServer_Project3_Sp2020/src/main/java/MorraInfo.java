@@ -21,11 +21,14 @@ public class MorraInfo implements Serializable
 	///player moves (1 to 5) fingers
 	private int p1Plays;	
 	private int p2Plays;	
-		 	
+	
+	//checks to see if there are 2 players avaiable
 	public Boolean have2players;
+	
+	//number of clients in the game
 	ArrayList<Integer> clientHolder = new ArrayList<Integer>(0);
 	
-	
+	//keeping track of how many times player 1 and 2 won the rounds
 	ArrayList<Integer> player1Winn = new ArrayList<Integer>();;
 	ArrayList<Integer> player2Winn = new ArrayList<Integer>();;
 	
@@ -39,23 +42,20 @@ public class MorraInfo implements Serializable
 		p2Points = 0;
 		p1Plays =  0;
 		p2Plays =  0;
-
-		
 		have2players = false;
 	}
 	
-	//
+	//guess number player 1
 	void setP1Guess(int p1)
 	{
 		this.p1Guess = p1;
 	}
-	
 	int getP1Guess()
 	{
 		return this.p1Guess;
 	}
 	
-	//
+	//guess number player 2
 	void setP2Guess(int p2)
 	{
 		this.p2Guess = p2;
@@ -133,16 +133,16 @@ public class MorraInfo implements Serializable
 	
 		if((getp1Plays() + getp2Plays() == getP1Guess()) && (getp1Plays() + getp2Plays() != getP2Guess()))
 		{			
-			return 1;
+			return 1;	//player 1 wins
 		} 
 		
 		if((getp1Plays() + getp2Plays() == getP2Guess()) && (getp1Plays() + getp2Plays() != getP1Guess()))
 		{			
-			return 2;
+			return 2;	//player 2 wins
 		}
 		else 
 		{
-			return 0;	
-		}
+			return 0;	//no one won
+		}	
 	}
 }
