@@ -93,26 +93,26 @@ public class TheGameOfMorra extends Application {
 					
 					if(data.have2players == true)
 					{
-						if( (data.getP1Guess() !=0) && (data.getp1Plays() ==0 ))
+						if((data.getP1Guess() !=0) && (data.getp1Plays()==0) && (p1Guessed==false)) 
 						{
 							listItems.getItems().add("Player 1 guessed "+ data.getP1Guess());
 							p1Guessed=true;
 						}
 						
-						else if((data.getp1Plays() != 0) && (data.getP1() == 1)) 
+						else if((data.getp1Plays() != 0) && (data.getP1() == 1) && (p1Played==false)) 
 						{
 							listItems.getItems().add("Player 1 played "+data.getp1Plays());
 							p1Played=true;
 						}
 					   
-						else if( (data.getP2Guess() !=0) && (data.getp2Plays() ==0 ))
+						else if( (data.getP2Guess() !=0) && (data.getp2Plays() ==0 ) && (p2Guessed==false))
 						{
 							listItems.getItems().add("Player 2 guessed "+ data.getP2Guess());
 							p2Guessed=true;
 						}
 						
 
-						else if((data.getp2Plays() != 0) && (data.getP2() == 3))
+						else if((data.getp2Plays() != 0) && (data.getP2() == 3) && (p2Played==false))
 						{
 							listItems.getItems().add("Player 2 played "+data.getp2Plays());
 							p2Played=true;
@@ -125,6 +125,10 @@ public class TheGameOfMorra extends Application {
 					
 					if((p1Guessed==true) && (p2Guessed==true) && (p1Played==true) && (p2Played==true))
 					{
+					 	p1Guessed=false;
+					 	p2Guessed=false;
+					 	p1Played=false;
+					 	p2Played=false;
 							
 						 	if(data.winner() == 1)
 							{
@@ -157,10 +161,7 @@ public class TheGameOfMorra extends Application {
 								listItems.getItems().add("No one WON THIS ROUND");
 								System.out.print("Here");
 							}
-						 	p1Guessed=false;
-						 	p2Guessed=false;
-						 	p1Played=false;
-						 	p2Played=false;
+
 					}
 					
 				}); 

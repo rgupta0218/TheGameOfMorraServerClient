@@ -126,38 +126,22 @@ public class MorraInfo implements Serializable
 		return this.p2Plays;
 	}
 	
+	
+	//check who won the game, player 1 or player 2
 	int winner()
 	{
-		//int total = getp1Plays() + getp2Plays(); 
-		if((getp1Plays() + getp2Plays() == getP1Guess()) && (getp1Plays() + getp2Plays() != getP2Guess())  )
-		{
-			//System.out.println("total: " + total);
-			System.out.println("p1 plays: " + getp1Plays());
-			System.out.println("p2 plays: " + getp2Plays());
-			System.out.println("P1 guess: " + getP1Guess());
-			System.out.println("P2 guess: " + getP2Guess());
-			
+	
+		if((getp1Plays() + getp2Plays() == getP1Guess()) && (getp1Plays() + getp2Plays() != getP2Guess()))
+		{			
 			return 1;
 		} 
 		
-		if((getp1Plays() + getp2Plays() == getP2Guess()) && (getp1Plays() + getp2Plays() != getP1Guess() ))
-		{
-			//System.out.println("total: " + total);
-			System.out.println("p1 plays: " + getp1Plays());
-			System.out.println("p2 plays: " + getp2Plays());
-			System.out.println("P1 guess: " + getP1Guess()); 
-			System.out.println("P2 guess: " + getP2Guess()); 
-			
+		if((getp1Plays() + getp2Plays() == getP2Guess()) && (getp1Plays() + getp2Plays() != getP1Guess()))
+		{			
 			return 2;
 		}
-		else {
-
-			//System.out.println("total: " + total);
-			System.out.println("p1 plays: " + getp1Plays());
-			System.out.println("p2 plays: " + getp2Plays());
-			System.out.println("P1 guess: " + getP1Guess());
-			System.out.println("P2 guess: " + getP2Guess());
-			
+		else 
+		{
 			return 0;	
 		}
 	}

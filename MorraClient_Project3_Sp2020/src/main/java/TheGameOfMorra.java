@@ -171,8 +171,8 @@ public class TheGameOfMorra extends Application {
 										listItems.getItems().add("Player 1 WON THE GAME");
 									}
 									
-									GuessButton.setDisable(false);
-									imageDisableFalse();
+									GuessButton.setDisable(true);
+									imageDisable() ;
 	
 	
 								}
@@ -188,8 +188,8 @@ public class TheGameOfMorra extends Application {
 									{
 										listItems.getItems().add("Player 2 WON THE GAME");
 									}
-									GuessButton.setDisable(false);
-									imageDisableFalse();
+									GuessButton.setDisable(true);
+									imageDisable() ;
 
 	
 									
@@ -198,9 +198,9 @@ public class TheGameOfMorra extends Application {
 								else 
 								{
 									
-									listItems.getItems().add("No one WON");
-									GuessButton.setDisable(false);
-									imageDisableFalse();
+									listItems.getItems().add("No one WON THIS ROUND");
+									GuessButton.setDisable(true);
+									imageDisable() ;
 	
 								}
 							} 
