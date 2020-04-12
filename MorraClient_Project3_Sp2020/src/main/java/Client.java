@@ -33,33 +33,29 @@ public class Client extends Thread{
 	
 	//code given in the class
 	public void run() {
-		
 		try 
 		{
+			//creating the socket with the input from client 
 			socketClient= new Socket(this.ipadss,this.portnum);
 		    out = new ObjectOutputStream(socketClient.getOutputStream());
 		    in = new ObjectInputStream(socketClient.getInputStream());
 		    socketClient.setTcpNoDelay(true);
-		     
 		    
 			try 
 			{
+				//reading in object from server
 				this.morraInfo = (MorraInfo) in.readObject();
 				clientNumber=morraInfo.clientHolder.lastIndexOf(1);
 				callback.accept(morraInfo);
 			}
 			catch(Exception e) 
-			{
-				
-			}
+			{}
 			send(morraInfo);	//send the information
 			
 		}
 		catch(Exception e) 
-		{
-			
-		}
-			
+		{}
+		//takeing in information in loop 
 			while(true)
 			{
 				try 
@@ -69,14 +65,12 @@ public class Client extends Thread{
 					callback.accept(morraInfo2);					
 				}
 				catch (Exception e) 
-				{
-					
-				}
+				{}
 			}
 	
     }
 	
-	//send the information to server, type object
+	//send the information to server
 	public void send(MorraInfo morraInfo) 
 	{  
 		try 

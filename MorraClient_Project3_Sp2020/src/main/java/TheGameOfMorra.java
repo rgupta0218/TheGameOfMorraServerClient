@@ -69,19 +69,21 @@ public class TheGameOfMorra extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
+		//The title of the scene
 		primaryStage.setTitle("(Client) Let's Play Morra!!!");
 		
+		//initializing variables and widgets
 		morraInfo = new MorraInfo();
 		TurnOnClient = new Button("Connect to Server");
-		port = new TextField("5555");
-		ipAdd = new TextField("127.0.0.1"); 
-		listItems = new ListView<String>();
+		port = new TextField("5555");  //text field to take in user port number 
+		ipAdd = new TextField("127.0.0.1");  // text field to take in use ipaddress
+		listItems = new ListView<String>(); // list view to show the contents of the game
 		tf = new TextField();
 		GuessButton = new Button("Guess"); 
 		whoWon = new VBox();
 		whoWon.setTranslateX(100); 
 		
-		
+		//setting the size of the text fields 
 		port.setPrefWidth(120);
 		port.setMaxWidth(120);
 		ipAdd.setPrefWidth(120);
@@ -90,6 +92,7 @@ public class TheGameOfMorra extends Application
 		tf.setMaxWidth(120);
 		tf.setPromptText("Enter your guess"); 
 		
+		//color adjust for the finger images
         colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(-0.5);
         
@@ -99,37 +102,39 @@ public class TheGameOfMorra extends Application
        
         move.setTranslateX(100); 
 		
-        
+        //fetching the finger images from the folder  
 		Image finger1 = new Image("one.png");
 		Image finger2 = new Image("two.png");
 		Image finger3 = new Image("three.png");
 		Image finger4 = new Image("four.jpeg");
 		Image finger5 = new Image("five.jpeg");
 		
+		//creating the image view to show them on GUI
 		imageOne = new ImageView(finger1);		
 		imageTwo = new ImageView(finger2);		
 		imageThree = new ImageView(finger3);
 		imageFour = new ImageView(finger4);
 		imageFive = new ImageView(finger5);
 
-		
+		//button to play next round
 		playNextRoound = new Button("Play next round");
 		playNextRoound.setDisable(true);
 		
+		//button to play next game
 		playNextGame = new Button("Play next game");
 		playNextGame.setDisable(true);
 		
+		//button to exit the game 
 		exit = new Button("Exit game");
 		
-		
+		//labels to show the the score of both players
 		winnerLabelP1 = new Label("Player1: " + P1TotalWin);
 		winnerLabelP2 = new Label("Player2: " + P2TotalWin);
-		
-
 		
 		scoreBox = new VBox();
 		scoreBox2  = new VBox(winnerLabelP1,winnerLabelP2, scoreBox);  
 	    
+		//setting different color and  size to the labels
 		winnerLabelP1.setText("Player1 points: " + P1TotalWin);
 	    winnerLabelP1.setTextFill(Color.web("RED", 1.0));
 	    winnerLabelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
@@ -140,13 +145,13 @@ public class TheGameOfMorra extends Application
 	    winnerLabelP2.setFont(Font.font("Times", FontWeight.BOLD,25));
 		scoreBox.getChildren().addAll(winnerLabelP2);
 		
-		
+		//action when play next round is clicked
 		playNextRoound.setOnAction(h->
 		{
-			myclear();
-	
+			myclear(); 
 		});
 		
+		//action when play next game is clicked
 		playNextGame.setOnAction(e->
 		{
 			myclear();
@@ -155,7 +160,7 @@ public class TheGameOfMorra extends Application
 			primaryStage.show();
 		});
 		
-		
+		//action when exit button is clicked
 		exit.setOnAction(e->
 		{			
 			try {
@@ -170,7 +175,7 @@ public class TheGameOfMorra extends Application
 			}
 		});
 		
-		
+		//button to turn on the client and connect it to the server
 		TurnOnClient.setOnAction(e-> 
 		{
 				primaryStage.setScene(sceneMap.get("client"));
@@ -184,10 +189,10 @@ public class TheGameOfMorra extends Application
 
 					Platform.runLater(()->
 					{	
-
+						//checking if there are two player in the game in order to start the game
 						if(data.have2players == true )
 						{
- 
+							//Notifying the players that they have an opponent ready t play
 							if(isPrinted == false) 
 							{
 								listItems.getItems().add("Opponent has joined");
@@ -202,7 +207,7 @@ public class TheGameOfMorra extends Application
 								(data.getp1Plays() !=0)  && 
 								(data.getP1() == 1))
 							{
-								
+								//Printing the information taken in from the palyers
 								listItems.getItems().add("Player 1 guessed "+ data.getP1Guess());
 								listItems.getItems().add("Player 1 played "+data.getp1Plays());
 								listItems.getItems().add("Player 2 guessed "+ data.getP2Guess());
@@ -211,6 +216,7 @@ public class TheGameOfMorra extends Application
 								
 								playNextRoound.setDisable(false);
 								
+								//checking who picked which finger and displaying
 								if(data.getp1Plays() == 1)
 								{
 									ImageView imageView1 = new ImageView(finger1);
@@ -311,16 +317,14 @@ public class TheGameOfMorra extends Application
 									whoWon.getChildren().addAll(labelP2);
 								}
 								
+								//checking who won the game/round and displaying it on the GUI
 								if(data.winner() == 1)
 								{
 									listItems.getItems().add("Player 1 WON THIS ROUND");
 									client.morraInfo.player1Winn.add(1);
 
-									P1TotalWin++; 
-									 
+									P1TotalWin++;
 									
-									
-						
 									winnerLabelP1.setText("Player1 points: " + P1TotalWin);
 								    winnerLabelP1.setTextFill(Color.web("RED", 1.0));
 								    winnerLabelP1.setFont(Font.font("Times", FontWeight.BOLD,25));
@@ -389,7 +393,7 @@ public class TheGameOfMorra extends Application
 
 		imageDisable();
 
-	
+		//action when guess button is clicked
 		GuessButton.setOnAction(e->
 		{
 			if(client.morraInfo.getP1() == client.clientNumber)
@@ -535,6 +539,7 @@ public class TheGameOfMorra extends Application
 		BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
 		VBox clientV = new VBox(port, ipAdd,TurnOnClient);
 		
+		//setting everything on the border pane
 		BorderPane pane = new BorderPane(clientV);
 		pane.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,BackgroundPosition.CENTER,bSize)));
 		Scene scene = new Scene(pane,831,530);
@@ -542,7 +547,7 @@ public class TheGameOfMorra extends Application
 		primaryStage.show();
 	}
 
-	
+	//function for setting size for the new image view
 	public void imageViewFunc(ImageView imageView)
 	{
 		imageView.setFitHeight(100);
@@ -550,6 +555,7 @@ public class TheGameOfMorra extends Application
 		imageView.setPreserveRatio(true);
 	}
 	
+	//function to disable the images
 	public void imageDisable() 
 	{
 		imageOne.setDisable(true);
@@ -559,6 +565,7 @@ public class TheGameOfMorra extends Application
 		imageFive.setDisable(true);
 	}
 	
+	//function to enable the images
 	public void imageDisableFalse() 
 	{
 		imageOne.setDisable(false);
@@ -568,6 +575,7 @@ public class TheGameOfMorra extends Application
 		imageFive.setDisable(false);
 	}
 	
+	//function to clear everything for the next game/round
 	public void myclear()
 	{
 		client.morraInfo.setp1Plays(0);
@@ -600,20 +608,18 @@ public class TheGameOfMorra extends Application
 	}
 	
 	
-	
+	//creating new scene for the client gui
 	public Scene createClientGui() 
 	{
 		fingersBox = new HBox(imageOne,imageTwo, imageThree,imageFour, imageFive);
 		 
 		clientBox = new VBox(10, tf,GuessButton,fingersBox,move,playNextRoound,playNextGame,exit);
-		
 		 
 		listItems.setPrefSize(50, 100); 
 		
 		whoWon.setTranslateX(0);
 		scoreBox.setTranslateX(-55);
 		scoreBox.setTranslateY(-5);
-		
 		
 		BorderPane pane1 = new BorderPane();
 		pane1.setTop(clientBox);
