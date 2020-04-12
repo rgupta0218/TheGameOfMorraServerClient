@@ -1,3 +1,8 @@
+/*
+ * Het Banker NetID: hbanke2 
+ * Ria Gupta NetID: rgupta40
+ */
+
 import java.io.ObjectInputStream; 
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -7,17 +12,16 @@ import java.util.function.Consumer;
 
 public class Server
 {
-
-	int count = 1;	
+	
+	int count = 1;	//keeps track of number of clients in the game
 	ArrayList<ClientThread> clients = new ArrayList<ClientThread>();
 	TheServer server;
-	private Consumer<MorraInfo> callback;
-	MorraInfo morraInfo;
-	int totalClients;
+	private Consumer<MorraInfo> callback; 
+	MorraInfo morraInfo;	//instance of morraLife
 	
-	
-	Server(Consumer<MorraInfo> call){
-	
+	//constructor 
+	Server(Consumer<MorraInfo> call)
+	{
 		callback = call;
 		morraInfo = new MorraInfo();
 		server = new TheServer();
@@ -25,9 +29,12 @@ public class Server
 	}
 	
 	
+	/*****************************************************************************************/
+	//theServer class
 	public class TheServer extends Thread{
 		
-		public void run() {
+		public void run() 
+		{
 		
 			try(ServerSocket mysocket = new ServerSocket(5555);)
 			{
@@ -40,6 +47,7 @@ public class Server
 					clients.add(c);
 					morraInfo.clientHolder.add(clients.size());
 					
+					//set our player to player 1 and player 2
 					if(count == 1)
 					{
 						morraInfo.setP1(1);
@@ -49,14 +57,17 @@ public class Server
 						morraInfo.setP2(3);
 						morraInfo.have2players= true;
 					}
-					c.start();
-					count++;
+					c.start();	//start the thread for the client
+					count++;	//increment the counter for the number clients
 				}
 			}//end of try
-				catch(Exception e) {}
+			catch(Exception e) {
+				
+			}
 			}//end of while
 		}
 	
+	//checks to see how many clients are currently connected
 	public void threadCheck()
 	{
 		for(int i = 0; i<clients.size(); i++) 
@@ -69,7 +80,7 @@ public class Server
 	}
 
 	
-	/*****************************/
+	/*****************************************************************************************/
 		class ClientThread extends Thread
 		{
 		
@@ -78,7 +89,7 @@ public class Server
 			ObjectInputStream in;
 			ObjectOutputStream out;
 			
-			
+			//constructor for the client thread
 			ClientThread(Socket s, int clientCounter){
 				this.connection = s;
 				this.count = clientCounter;	
@@ -97,13 +108,12 @@ public class Server
 			 
 			
 			public void run( ) 
-			{
-					
-				try {
+			{	
+				try 
+				{
 					in = new ObjectInputStream(connection.getInputStream());
 					out = new ObjectOutputStream(connection.getOutputStream());
 					connection.setTcpNoDelay(true);	
-					
 					morraInfo.clientHolder.add(1);
 					updateClients(morraInfo);
 					
@@ -114,32 +124,28 @@ public class Server
 
 				 while(true) 
 				 { 
-						    try 
-						    {
-						    	MorraInfo morraInfoClient = (MorraInfo)in.readObject();
-						    	morraInfo = morraInfoClient;
-						    	callback.accept(morraInfo);
-						   
-	
-						     	//update2Players(morraInfo); 
-						     	updateClients(morraInfo); 
-						    	connection.setTcpNoDelay(true); 
-						    }
-						    
-						    catch(Exception e) 
-						    {
-						    	
-						    	System.out.println("Client has left");
-						    	morraInfo.have2players = false;
-						    	updateClients(morraInfo); 
-						    	clients.remove(this);
-						    	break;
-						    }
+					    try 
+					    {
+					    	MorraInfo morraInfoClient = (MorraInfo)in.readObject();
+					    	morraInfo = morraInfoClient;
+					    	callback.accept(morraInfo);
+					     	updateClients(morraInfo); 
+					    	connection.setTcpNoDelay(true); 
+					    }
+					    
+					    catch(Exception e) 
+					    {	
+					    	System.out.println("Client has left");
+					    	morraInfo.have2players = false;
+					    	updateClients(morraInfo); 
+					    	clients.remove(this);
+					    	break;
+					    }
 
-					}
+				} //end of while
 				 
-				}//end of run 
+			} //end of run 
 			
-		}//end of client thread
+		} //end of client thread
 		
 }

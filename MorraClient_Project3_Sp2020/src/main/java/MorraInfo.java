@@ -1,3 +1,8 @@
+/*
+ * Het Banker NetID: hbanke2 
+ * Ria Gupta NetID: rgupta40
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

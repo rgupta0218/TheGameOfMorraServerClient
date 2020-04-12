@@ -1,3 +1,8 @@
+/*
+ * Het Banker NetID: hbanke2 
+ * Ria Gupta NetID: rgupta40
+ */
+
 import javafx.scene.control.Label;
 import java.io.IOException;
 import java.util.HashMap;
