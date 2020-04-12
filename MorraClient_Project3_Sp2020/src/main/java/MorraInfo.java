@@ -17,7 +17,7 @@ public class MorraInfo implements Serializable
 	
 	//players gusses
 	private int p1Guess;
-	private int p2Guess;
+	private int p2Guess; 
 	
 	//number of games each player won
 	private int p1Points;	

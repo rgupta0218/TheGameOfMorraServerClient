@@ -3,7 +3,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-
 class MorraTest 
 {
 	MorraInfo morraInfo;
@@ -13,6 +12,14 @@ class MorraTest
 	{
 		morraInfo = new MorraInfo();
 	}
+	
+	//check if there are 2 players
+	@Test
+	void checkConnection()
+	{
+		assertEquals(false, morraInfo.have2players, "should be false where no one is connected");	
+	}
+	
 
 	//case where no one wins
 	@Test
@@ -47,4 +54,25 @@ class MorraTest
 		assertEquals(2, morraInfo.winner(), "player 2 should win");	
 	}
 	
+	//case where both players guess the same and 
+	@Test
+	void checkWinner4()
+	{
+		morraInfo.setp1Plays(6);
+		morraInfo.setp2Plays(1);
+		morraInfo.setP1Guess(7);
+		morraInfo.setP2Guess(7);
+		assertEquals(0, morraInfo.winner(), "no one should win");	
+	}
+	
+	//no one wins
+	@Test
+	void checkWinner5() 
+	{
+		morraInfo.setp1Plays(6);
+		morraInfo.setp2Plays(2);
+		morraInfo.setP1Guess(7);
+		morraInfo.setP2Guess(7);
+		assertEquals(0, morraInfo.winner(), "no one should win");	
+	}
 }

@@ -182,7 +182,6 @@ public class TheGameOfMorra extends Application
 				{
 					countclient++;
 
-					
 					Platform.runLater(()->
 					{	
 
@@ -331,9 +330,7 @@ public class TheGameOfMorra extends Application
 										System.out.println("Two labes");
 									}
 								    
-								   
-									
-									
+
 									if(P1TotalWin==2) 
 									{
 										listItems.getItems().add("Player 1 WON THE GAME");
@@ -359,7 +356,7 @@ public class TheGameOfMorra extends Application
 										System.out.println("Two labes");
 									}
 									
-									//System.out.println("arraySize P2: "+ data.player2Winn.size());
+								
 									if(P2TotalWin ==2) 
 									{
 										listItems.getItems().add("Player 2 WON THE GAME");

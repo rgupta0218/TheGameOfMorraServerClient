@@ -129,7 +129,7 @@ public class MorraInfo implements Serializable
 	int getp2Plays() 
 	{
 		return this.p2Plays;
-	}
+	} 
 	
 	
 	//check who won the game, player 1 or player 2
